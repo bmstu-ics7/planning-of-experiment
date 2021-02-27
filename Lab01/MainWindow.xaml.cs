@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
+using System.Collections.Generic;
+using OxyPlot;
+using OxyPlot.Wpf;
 
 namespace Lab01
 {
@@ -13,14 +15,23 @@ namespace Lab01
         public MainWindow()
         {
             InitializeComponent();
-
-            this.DataContext = new MainWindowView();
-            Oxyplot_Test.InvalidatePlot(true);
         }
 
         private void Button_Calculate_Click(object sender, RoutedEventArgs e)
         {
-            ((MainWindowView)this.DataContext).Title = "Click";
+            IList<DataPoint> p = new List<DataPoint>();
+            p.Add(new DataPoint(0, 0));
+            p.Add(new DataPoint(1, 1));
+            p.Add(new DataPoint(2, 2));
+            p.Add(new DataPoint(3, 3));
+            LineSeries ls = new LineSeries
+            {
+                ItemsSource = p
+            };
+
+            Oxyplot_Output.Series.Clear();
+            Oxyplot_Output.Series.Add(ls);
+            Oxyplot_Output.InvalidatePlot(true);
         }
 
         private void ChechIsNumber(TextBox textBox)
