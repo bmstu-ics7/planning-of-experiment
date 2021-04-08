@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System;
 
 namespace Lab01.QueuingSystem
 {
@@ -8,8 +9,6 @@ namespace Lab01.QueuingSystem
         private readonly Generator _generator;
 
         private IList<IBlock> _blocks;
-
-
 
         public Model(Generator generator, List<IBlock> blocks)
         {
@@ -22,8 +21,9 @@ namespace Lab01.QueuingSystem
             uint time = 0;
             List<int> timesWait = new List<int>();
 
-            while (_generator.Count >= 0)
+            while (_generator.Count > 0)
             {
+                Console.WriteLine(time);
                 time = _generator.Next;
                 foreach (var block in _blocks)
                 {
@@ -45,16 +45,13 @@ namespace Lab01.QueuingSystem
                                 next.Next = time + next.Delay();
                             }
 
-                            block.Next = time + block.Delay();
+                            var del = block.Delay();
+                            block.Next = time + del;
                         }
                         else
                         {
                             uint startTime = ((Operator)block).ProcessRequest();
-
-                            if (startTime > 0)
-                            {
-                                timesWait.Add((int)(time - startTime));
-                            }
+                            timesWait.Add((int)(time - startTime));
 
                             if (((Operator)block).Queue == 0)
                             {
@@ -69,7 +66,7 @@ namespace Lab01.QueuingSystem
                 }
             }
 
-            return timesWait.Average();
+            return timesWait.Count > 0 ? timesWait.Average() : 0;
         }
     }
 }

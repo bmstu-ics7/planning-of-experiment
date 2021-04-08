@@ -5,6 +5,9 @@ using System.Collections.Generic;
 using OxyPlot;
 using OxyPlot.Wpf;
 
+using Lab01.Distributions;
+using Lab01.QueuingSystem;
+
 namespace Lab01
 {
     /// <summary>
@@ -19,43 +22,59 @@ namespace Lab01
 
         private void Button_Calculate_Click(object sender, RoutedEventArgs e)
         {
-            IList<DataPoint> p = new List<DataPoint>();
-            p.Add(new DataPoint(0, 0));
-            p.Add(new DataPoint(1, 1));
-            p.Add(new DataPoint(2, 2));
-            p.Add(new DataPoint(3, 3));
-            LineSeries ls = new LineSeries
+            bool generatorParsed = double.TryParse(TextBox_SigmaGenerator.Text, out double sigmaGenerator);
+            bool timeParsed = double.TryParse(TextBox_SigmaTime.Text, out double sigmaTime);
+
+            if (generatorParsed && timeParsed)
             {
-                ItemsSource = p
-            };
+                try
+                {
+                    var generatorDistribution = new Rayleigh(sigmaGenerator);
+                    var timeDistribytion = new Rayleigh(sigmaTime);
 
-            Oxyplot_Output.Series.Clear();
-            Oxyplot_Output.Series.Add(ls);
-            Oxyplot_Output.InvalidatePlot(true);
-        }
+                    var points = new List<DataPoint>();
+                    for (int count = 1; count < 1000; ++count)
+                    {
+                        double result = CalculateModel(generatorDistribution, timeDistribytion, count);
+                        points.Add(new DataPoint(count, result));
+                    }
 
-        private void ChechIsNumber(TextBox textBox)
-        {
-            string text = textBox.Text;
+                    LineSeries line = new LineSeries
+                    {
+                        ItemsSource = points
+                    };
 
-            try
-            {
-                Convert.ToDouble(text);
+                    Oxyplot_Output.Series.Clear();
+                    Oxyplot_Output.Series.Add(line);
+                    Oxyplot_Output.InvalidatePlot(true);
+                }
+                catch (ArgumentException ex)
+                {
+                    MessageBox.Show(
+                        ex.Message,
+                        "Ошибка",
+                        MessageBoxButton.OK,
+                        MessageBoxImage.Error
+                    );
+                }
             }
-            catch (FormatException)
+            else
             {
-                textBox.Text = text.Remove(text.Length - 1, 1);
+                MessageBox.Show(
+                    "Введите два вещественных числа с разделителем запятая.",
+                    "Ошибка",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Error
+                );
             }
         }
 
-        private void TextBox_SigmaGenerator_TextChanged(object sender, TextChangedEventArgs e)
+        private double CalculateModel(IDisctribution generatorDistribution, IDisctribution timeDistribution, int count)
         {
-            // ChechIsNumber(TextBox_SigmaGenerator);
-        }
-
-        private void TextBox_SigmaTime_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            // ChechIsNumber(TextBox_SigmaTime);
+            var op = new Operator(timeDistribution);
+            var generator = new Generator(generatorDistribution, new List<Operator> { op }, count);
+            var model = new QueuingSystem.Model(generator, new List<IBlock> { generator, op });
+            return model.Generate();
         }
     }
 }
