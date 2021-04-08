@@ -23,19 +23,26 @@ namespace Lab01
         {
             int count = 10000;
 
-            double lambdaProcessing = 0.1;
+            double lambdaProcessing = 10.0;
             double sigmaTime = Rayleigh.ConvertLambdaToSigma(lambdaProcessing);
             var timeDistribytion = new Rayleigh(sigmaTime);
 
             var points = new List<DataPoint>();
 
-            for (double lambdaComing = 0.01; lambdaComing <= lambdaProcessing; lambdaComing += 0.001)
+            for (double lambdaComing = 0.1; lambdaComing <= lambdaProcessing; lambdaComing += 0.3)
             {
-                double sigmaGenerator = Rayleigh.ConvertLambdaToSigma(lambdaComing);
-                var generatorDistribution = new Rayleigh(sigmaGenerator);
+                double sumExperiments = 0;
+                int countExperiments = 100;
 
-                double result = CalculateModel(generatorDistribution, timeDistribytion, count).AverageTime;
-                points.Add(new DataPoint(lambdaComing / lambdaProcessing, result));
+                for (int i = 0; i < countExperiments; ++i)
+                {
+                    double sigmaGenerator = Rayleigh.ConvertLambdaToSigma(lambdaComing);
+                    var generatorDistribution = new Rayleigh(sigmaGenerator);
+
+                    sumExperiments += CalculateModel(generatorDistribution, timeDistribytion, count).AverageTime;
+                }
+
+                points.Add(new DataPoint(lambdaComing / lambdaProcessing, sumExperiments / countExperiments));
             }
 
             LineSeries line = new LineSeries

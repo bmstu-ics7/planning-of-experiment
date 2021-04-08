@@ -32,7 +32,7 @@
         <TextBox x:Name="TextBox_SigmaTime" Text="1" Grid.Column="1" Grid.Row="3" Margin="0,0,10,0"/>
         <Button x:Name="Button_Calculate" Content="Посчитать" Grid.Column="1" Margin="0,10,10,0" Grid.Row="4" Click="Button_Calculate_Click"/>
 
-        <oxy:Plot x:Name="Oxyplot_Output" Title="Эксперимент" Grid.RowSpan="12">
+        <oxy:Plot x:Name="Oxyplot_Output" Title="Эксперимент" Grid.RowSpan="12" PanCursor="Hand" ZoomHorizontalCursor="SizeWE" ZoomRectangleCursor="SizeNWSE" ZoomVerticalCursor="SizeNS">
             <oxy:Plot.Axes>
                 <oxy:LinearAxis Position="Left" Title="Среднее время ожидания (с)" />
                 <oxy:LinearAxis Position="Bottom" Title="Коэффициент загрузки" />

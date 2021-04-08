@@ -9,7 +9,7 @@ namespace Lab01.Distributions
         private readonly Random _rnd;
 
         static public double ConvertLambdaToSigma(double lambda)
-            => (1.0 / lambda) / Math.Sqrt(Math.PI / 2.0);
+            => (1.0 / lambda) * 100;
 
         public Rayleigh(double sigma)
         {
