@@ -8,9 +8,8 @@ namespace Lab01.Distributions
 
         private readonly Random _rnd;
 
-        private readonly int _minX;
-
-        private readonly int _maxX;
+        static public double ConvertLambdaToSigma(double lambda)
+            => (1 / lambda) / Math.Sqrt(Math.PI / 2.0);
 
         public Rayleigh(double sigma)
         {
@@ -21,14 +20,6 @@ namespace Lab01.Distributions
 
             _sigma = sigma;
             _rnd = new Random();
-
-            _minX = 0;
-            
-            _maxX = 0;
-            for (double y = 1; y > 1e-6; ++_maxX)
-            {
-                y = Density(_maxX);
-            }
         }
 
         public uint Generate()

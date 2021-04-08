@@ -16,7 +16,7 @@ namespace Lab01.QueuingSystem
             _blocks = blocks;
         }
 
-        public double Generate()
+        public ModelResult Generate()
         {
             uint time = 0;
             List<int> timesWait = new List<int>();
@@ -66,7 +66,11 @@ namespace Lab01.QueuingSystem
                 }
             }
 
-            return timesWait.Count > 0 ? timesWait.Average() : 0;
+            return new ModelResult
+            {
+                Time = time,
+                AverageTime = timesWait.Count > 0 ? timesWait.Average() : 0,
+            };
         }
     }
 }
