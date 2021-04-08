@@ -103,5 +103,10 @@ namespace Lab01
             var model = new QueuingSystem.Model(generator, new List<IBlock> { generator, op });
             return model.Generate();
         }
+
+        private void Button_UpdateGraph_Click(object sender, RoutedEventArgs e)
+        {
+            this.MakeGraph();
+        }
     }
 }
