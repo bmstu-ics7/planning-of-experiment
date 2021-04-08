@@ -29,7 +29,7 @@ namespace Lab01
 
             var points = new List<DataPoint>();
 
-            for (double lambdaComing = 0.1; lambdaComing <= lambdaProcessing; lambdaComing += 0.3)
+            for (double lambdaComing = 0.1; lambdaComing <= lambdaProcessing;)
             {
                 double sumExperiments = 0;
                 int countExperiments = 100;
@@ -43,6 +43,15 @@ namespace Lab01
                 }
 
                 points.Add(new DataPoint(lambdaComing / lambdaProcessing, sumExperiments / countExperiments));
+
+                if (lambdaComing / lambdaProcessing <= 0.8)
+                {
+                    lambdaComing += 0.1;
+                }
+                else
+                {
+                    lambdaComing += 1;
+                }
             }
 
             LineSeries line = new LineSeries
