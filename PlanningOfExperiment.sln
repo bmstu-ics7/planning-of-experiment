@@ -8,6 +8,9 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Modeling", "Modeling\Modeling.csproj", "{F1683E86-3423-47D2-A3E4-DC7B96503A5D}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lab02", "Lab02\Lab02.csproj", "{486AF0F0-D406-4739-B735-A1983B80775A}"
+	ProjectSection(ProjectDependencies) = postProject
+		{F1683E86-3423-47D2-A3E4-DC7B96503A5D} = {F1683E86-3423-47D2-A3E4-DC7B96503A5D}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
