@@ -2,7 +2,7 @@
 using System.Linq;
 using System;
 
-namespace Lab01.QueuingSystem
+namespace Modeling.QueuingSystem
 {
     public class Model
     {

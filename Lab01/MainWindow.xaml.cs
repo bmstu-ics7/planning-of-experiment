@@ -3,8 +3,8 @@ using System.Windows;
 using System.Collections.Generic;
 using OxyPlot;
 using OxyPlot.Wpf;
-using Lab01.Distributions;
-using Lab01.QueuingSystem;
+using Modeling.Distributions;
+using Modeling.QueuingSystem;
 
 namespace Lab01
 {
@@ -16,7 +16,6 @@ namespace Lab01
         public MainWindow()
         {
             InitializeComponent();
-            MakeGraph();
         }
 
         private void MakeGraph()
@@ -112,11 +111,11 @@ namespace Lab01
             }
         }
 
-        private ModelResult CalculateModel(IDisctribution generatorDistribution, IDisctribution timeDistribution, int count)
+        private ModelResult CalculateModel(IDistribution generatorDistribution, IDistribution timeDistribution, int count)
         {
             var op = new Operator(timeDistribution);
             var generator = new Generator(generatorDistribution, new List<Operator> { op }, count);
-            var model = new QueuingSystem.Model(generator, new List<IBlock> { generator, op });
+            var model = new Modeling.QueuingSystem.Model(generator, new List<IBlock> { generator, op });
             return model.Generate();
         }
 

@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace Lab01.Distributions
+namespace Modeling.Distributions
 {
-    internal class Rayleigh : IDisctribution
+    public class Rayleigh : IDistribution
     {
         private readonly double _sigma;
 

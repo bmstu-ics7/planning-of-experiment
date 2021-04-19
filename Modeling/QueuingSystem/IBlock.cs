@@ -1,4 +1,4 @@
-﻿namespace Lab01.QueuingSystem
+﻿namespace Modeling.QueuingSystem
 {
     public interface IBlock
     {
