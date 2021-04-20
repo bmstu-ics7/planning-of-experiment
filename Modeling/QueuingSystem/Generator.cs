@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
-using Lab01.Distributions;
+using Modeling.Distributions;
 
-namespace Lab01.QueuingSystem
+namespace Modeling.QueuingSystem
 {
     public class Generator : IBlock
     {
-        private readonly IDisctribution _disctribution;
+        private readonly IDistribution _distribution;
 
         private IList<Operator> _recievers;
 
@@ -16,23 +16,23 @@ namespace Lab01.QueuingSystem
             get => _count;
         }
 
-        private uint _next;
+        private double _next;
 
-        public uint Next
+        public double Next
         {
             get => _next;
             set => _next = value > 0 ? value : 0;
         }
 
-        public Generator(IDisctribution disctribution, IList<Operator> recievers, int count)
+        public Generator(IDistribution distribution, IList<Operator> recievers, int count)
         {
-            _disctribution = disctribution;
+            _distribution = distribution;
             _recievers = recievers;
             _count = count;
             _next = 0;
         }
 
-        public Operator GenerateRequest(uint currentTime)
+        public Operator GenerateRequest(double currentTime)
         {
             _count--;
 
@@ -47,6 +47,6 @@ namespace Lab01.QueuingSystem
             return null;
         }
 
-        public uint Delay() => _disctribution.Generate();
+        public double Delay() => _distribution.Generate();
     }
 }

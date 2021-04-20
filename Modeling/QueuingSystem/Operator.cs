@@ -1,38 +1,38 @@
-﻿using Lab01.Distributions;
+﻿using Modeling.Distributions;
 using System.Collections.Generic;
 
-namespace Lab01.QueuingSystem
+namespace Modeling.QueuingSystem
 {
     public class Operator : IBlock
     {
-        private readonly IDisctribution _disctribution;
+        private readonly IDistribution _distribution;
 
         private readonly uint _maxQueue;
 
         private uint _queue;
 
-        private readonly Queue<uint> _queueTimes;
+        private readonly Queue<double> _queueTimes;
 
         public uint Queue => _queue;
 
-        private uint _next;
+        private double _next;
 
-        public uint Next
+        public double Next
         {
             get => _next;
             set => _next = value > 0 ? value : 0;
         }
 
-        public Operator(IDisctribution disctribution, uint maxQueue = 0)
+        public Operator(IDistribution distribution, uint maxQueue = 0)
         {
-            _disctribution = disctribution;
+            _distribution = distribution;
             _maxQueue = maxQueue;
             _queue = 0;
             _next = 0;
-            _queueTimes = new Queue<uint>();
+            _queueTimes = new Queue<double>();
         }
 
-        public bool ResieveRequest(uint currentTime)
+        public bool ResieveRequest(double currentTime)
         {
             if (_maxQueue == 0 || _maxQueue > _queue)
             {
@@ -44,7 +44,7 @@ namespace Lab01.QueuingSystem
             return false;
         }
 
-        public uint ProcessRequest()
+        public double ProcessRequest()
         {
             if (_queue > 0)
             {
@@ -55,6 +55,6 @@ namespace Lab01.QueuingSystem
             return 0;
         }
 
-        public uint Delay() => _disctribution.Generate();
+        public double Delay() => _distribution.Generate();
     }
 }
