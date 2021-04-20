@@ -16,9 +16,9 @@ namespace Modeling.QueuingSystem
             get => _count;
         }
 
-        private uint _next;
+        private double _next;
 
-        public uint Next
+        public double Next
         {
             get => _next;
             set => _next = value > 0 ? value : 0;
@@ -32,7 +32,7 @@ namespace Modeling.QueuingSystem
             _next = 0;
         }
 
-        public Operator GenerateRequest(uint currentTime)
+        public Operator GenerateRequest(double currentTime)
         {
             _count--;
 
@@ -47,6 +47,6 @@ namespace Modeling.QueuingSystem
             return null;
         }
 
-        public uint Delay() => _distribution.Generate();
+        public double Delay() => _distribution.Generate();
     }
 }

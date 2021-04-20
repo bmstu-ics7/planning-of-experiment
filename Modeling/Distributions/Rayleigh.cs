@@ -1,15 +1,15 @@
 ﻿using System;
+using Troschuetz.Random.Distributions.Continuous;
 
 namespace Modeling.Distributions
 {
     public class Rayleigh : IDistribution
     {
-        private readonly double _sigma;
 
-        private readonly Random _rnd;
+        private readonly RayleighDistribution rayleighDistribution;
 
         static public double ConvertLambdaToSigma(double lambda)
-            => (1.0 / lambda) * 100;
+            => (1.0 / lambda) * Math.Pow(Math.PI / 2.0, -0.5);
 
         public Rayleigh(double sigma)
         {
@@ -18,18 +18,10 @@ namespace Modeling.Distributions
                 throw new ArgumentException("Параметр sigma должен быть больше или равен нуля.");
             }
 
-            _sigma = sigma;
-            _rnd = new Random();
+            rayleighDistribution = new RayleighDistribution(sigma);
         }
 
-        public uint Generate()
-        {
-            double value = _sigma + (Math.Sqrt(-2 * Math.Log(1 - _rnd.NextDouble())) - Math.Sqrt(Math.PI / 2)) * _sigma;
-            value = value > 0 ? value : 0;
-            return Convert.ToUInt32(value);
-        }
-
-        private double Density(double x) =>
-            x / Math.Pow(_sigma, 2) * Math.Exp(-Math.Pow(x, 2) / (2 * Math.Pow(_sigma, 2)));
+        public double Generate()
+            => rayleighDistribution.NextDouble();
     }
 }

@@ -4,4 +4,8 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Troschuetz.Random" Version="5.0.1" />
+  </ItemGroup>
+
 </Project>

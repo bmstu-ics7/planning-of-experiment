@@ -2,7 +2,7 @@
 {
     public interface IBlock
     {
-        uint Next { get; set; }
-        uint Delay();
+        double Next { get; set; }
+        double Delay();
     }
 }

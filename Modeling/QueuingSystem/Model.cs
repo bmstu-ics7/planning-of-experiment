@@ -18,7 +18,7 @@ namespace Modeling.QueuingSystem
 
         public ModelResult Generate()
         {
-            uint time = 0;
+            double time = 0;
             List<int> timesWait = new List<int>();
 
             while (_generator.Count > 0)
@@ -50,7 +50,7 @@ namespace Modeling.QueuingSystem
                         }
                         else
                         {
-                            uint startTime = ((Operator)block).ProcessRequest();
+                            double startTime = ((Operator)block).ProcessRequest();
                             timesWait.Add((int)(time - startTime));
 
                             if (((Operator)block).Queue == 0)

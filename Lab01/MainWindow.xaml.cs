@@ -31,7 +31,7 @@ namespace Lab01
             for (double lambdaComing = 0.1; lambdaComing <= lambdaProcessing;)
             {
                 double sumExperiments = 0;
-                int countExperiments = 100;
+                int countExperiments = 50;
 
                 for (int i = 0; i < countExperiments; ++i)
                 {

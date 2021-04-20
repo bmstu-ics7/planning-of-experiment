@@ -11,13 +11,13 @@ namespace Modeling.QueuingSystem
 
         private uint _queue;
 
-        private readonly Queue<uint> _queueTimes;
+        private readonly Queue<double> _queueTimes;
 
         public uint Queue => _queue;
 
-        private uint _next;
+        private double _next;
 
-        public uint Next
+        public double Next
         {
             get => _next;
             set => _next = value > 0 ? value : 0;
@@ -29,10 +29,10 @@ namespace Modeling.QueuingSystem
             _maxQueue = maxQueue;
             _queue = 0;
             _next = 0;
-            _queueTimes = new Queue<uint>();
+            _queueTimes = new Queue<double>();
         }
 
-        public bool ResieveRequest(uint currentTime)
+        public bool ResieveRequest(double currentTime)
         {
             if (_maxQueue == 0 || _maxQueue > _queue)
             {
@@ -44,7 +44,7 @@ namespace Modeling.QueuingSystem
             return false;
         }
 
-        public uint ProcessRequest()
+        public double ProcessRequest()
         {
             if (_queue > 0)
             {
@@ -55,6 +55,6 @@ namespace Modeling.QueuingSystem
             return 0;
         }
 
-        public uint Delay() => _distribution.Generate();
+        public double Delay() => _distribution.Generate();
     }
 }

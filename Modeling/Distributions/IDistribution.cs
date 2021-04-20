@@ -2,6 +2,6 @@
 {
     public interface IDistribution
     {
-        public uint Generate();
+        public double Generate();
     }
 }
