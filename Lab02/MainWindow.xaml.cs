@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Collections.Generic;
+using System.Linq;
 using Lab02.Models;
 using Modeling.Distributions;
 using Modeling.QueuingSystem;
@@ -13,7 +14,22 @@ namespace Lab02
     /// </summary>
     public partial class MainWindow : Window
     {
-        private readonly int countExp = 20;
+        private readonly int countAllExperiments = 4;
+
+        private readonly int countIterationExperiments = 20;
+
+        private double b0;
+        private double b1;
+        private double b2;
+        private double b12;
+
+        private double minLambdaComing;
+        private double maxLambdaComing;
+        private double minLambdaProcessing;
+        private double maxLambdaProcessing;
+        private int count;
+
+        private int n = 0;
 
         public MainWindow()
         {
@@ -41,25 +57,50 @@ namespace Lab02
         private double ConvertFactorToValue(double min, double max, double factor)
             => factor * ((max - min) / 2.0) + (max + min) / 2.0;
 
+        private double CalculateB(double min, double max, List<int> values, List<double> listY)
+        {
+            double b = 0;
+            for (int i = 0; i < countAllExperiments; ++i)
+            {
+                b += ConvertValueToFactor(min, max,ConvertFactorToValue(min, max, values[i])) * listY[i];
+            }
+            b /= (double)countAllExperiments;
+
+            return Math.Round(b, 5);
+        }
+
         private void Button_StartExperiment_Click(object sender, RoutedEventArgs e)
         {
-            bool parseMinComing = double.TryParse(TextBox_MinComing.Text, out double minLambdaComing);
-            bool parseMaxComing = double.TryParse(TextBox_MaxComing.Text, out double maxLambdaComing);
-            bool parseMinProcessing = double.TryParse(TextBox_MinProcessing.Text, out double minLambdaProcessing);
-            bool parseMaxProcessing = double.TryParse(TextBox_MaxProcessing.Text, out double maxLambdaProcessing);
-            bool parseCount = int.TryParse(TextBox_Count.Text, out int count);
+            bool parseMinComing = double.TryParse(TextBox_MinComing.Text, out minLambdaComing);
+            bool parseMaxComing = double.TryParse(TextBox_MaxComing.Text, out maxLambdaComing);
+            bool parseMinProcessing = double.TryParse(TextBox_MinProcessing.Text, out minLambdaProcessing);
+            bool parseMaxProcessing = double.TryParse(TextBox_MaxProcessing.Text, out maxLambdaProcessing);
+            bool parseCount = int.TryParse(TextBox_Count.Text, out count);
 
             if (parseMinComing && parseMaxComing && parseMinProcessing && parseMaxProcessing && parseCount)
             {
                 ListView_TableParameters.Items.Clear();
 
-                for (int i = 1; i <= 4; ++i)
+                var listX0 = new List<int>();
+                var listX1 = new List<int>();
+                var listX2 = new List<int>();
+                var listX12 = new List<int>();
+                var listY = new List<double>();
+
+                for (int i = 1; i <= countAllExperiments; ++i)
                 {
-                    int n = i;
+                    n = i;
                     int x0 = 1;
+                    listX0.Add(x0);
+
                     int x1 = i % 2 == 0 ? 1 : -1;
+                    listX1.Add(x1);
+
                     int x2 = (i - 1) / 2 % 2 == 0 ? -1 : 1;
+                    listX2.Add(x2);
+
                     int x12 = x1 * x2;
+                    listX12.Add(x12);
 
                     double lambdaComing = ConvertFactorToValue(minLambdaComing, maxLambdaComing, x1);
                     double lambdaProcessing = ConvertFactorToValue(minLambdaProcessing, maxLambdaProcessing, x2);
@@ -71,15 +112,28 @@ namespace Lab02
                     var proecssingDisctribution = new Rayleigh(sigmaProcessing);
 
                     double y = 0;
-                    for (int exp = 0; exp < countExp; ++exp)
+                    for (int exp = 0; exp < countIterationExperiments; ++exp)
                     {
                         ModelResult result = CalculateModel(comingDistribution, proecssingDisctribution, count);
                         y += result.AverageTime;
                     }
-                    y = Math.Round(y / (double)countExp, 5);
+                    y = Math.Round(y / (double)countIterationExperiments, 5);
+                    listY.Add(y);
 
-                    ListView_TableParameters.Items.Add(new EquationCoefffcients(n, x0, x1, x2, x12, y, 0, 0, 0, 0));
+                    double yl = 0;
+                    double ycn = 0;
+
+                    ListView_TableParameters.Items.Add(new EquationCoefffcients(n, x0, x1, x2, x12, y, yl, ycn, Math.Abs(y - yl), Math.Abs(y - ycn)));
                 }
+
+                b0 = CalculateB(0, 1, listX0, listY);
+                b1 = CalculateB(minLambdaComing, maxLambdaComing, listX1, listY);
+                b2 = CalculateB(minLambdaProcessing, maxLambdaProcessing, listX2, listY);
+                b12 = CalculateB(minLambdaComing * minLambdaProcessing, maxLambdaComing * maxLambdaProcessing, listX12, listY);
+
+                ListView_TableResults.Items.Clear();
+                ListView_TableResults.Items.Add(new EquationResult(b0, b1, b2, b12));
+
                 Button_AddPoint.IsEnabled = true;
             }
             else
@@ -100,7 +154,15 @@ namespace Lab02
 
             if (parseComing && parseProcessing)
             {
-
+                n++;
+                double x0 = 1;
+                double x1 = ConvertValueToFactor(minLambdaComing, maxLambdaComing, lambdaComing);
+                double x2 = ConvertValueToFactor(minLambdaProcessing, maxLambdaProcessing, lambdaProcessing);
+                double x12 = x1 * x2;
+                double y = Math.Round(b0 + x1 * b1 + x2 * b2 + x12 * b12, 5);
+                double yl = 0;
+                double ycn = 0;
+                ListView_TableParameters.Items.Add(new EquationCoefffcients(n, x0, x1, x2, x12, y, yl, ycn, Math.Abs(y - yl), Math.Abs(y - ycn)));
             }
             else
             {
