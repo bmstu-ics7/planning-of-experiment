@@ -1,0 +1,43 @@
+﻿<UserControl x:Class="FullFactorExperiment.FullFactorExperimentElement"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:FullFactorExperiment"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid Grid.Row="1">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="3*"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <ListView x:Name="ListView_TableParameters" SizeChanged="ListView_SizeChanged" FontSize="14" Grid.RowSpan="1" >
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="№" DisplayMemberBinding="{Binding N}"/>
+                    <GridViewColumn Header="x0" DisplayMemberBinding="{Binding X0}"/>
+                    <GridViewColumn Header="x1" DisplayMemberBinding="{Binding X1}"/>
+                    <GridViewColumn Header="x2" DisplayMemberBinding="{Binding X2}"/>
+                    <GridViewColumn Header="x12" DisplayMemberBinding="{Binding X12}"/>
+                    <GridViewColumn Header="Y" DisplayMemberBinding="{Binding Y}"/>
+                    <GridViewColumn Header="Yл" DisplayMemberBinding="{Binding Yl}"/>
+                    <GridViewColumn Header="Yчн" DisplayMemberBinding="{Binding Ycn}"/>
+                    <GridViewColumn Header="|Y-Yл|" DisplayMemberBinding="{Binding YmYl}"/>
+                    <GridViewColumn Header="|Y-Yчн|" DisplayMemberBinding="{Binding YmYcn}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <ListView x:Name="ListView_TableResults" SizeChanged="ListView_SizeChanged" FontSize="14" Grid.RowSpan="1" Grid.Row="1">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="b0" DisplayMemberBinding="{Binding B0}"/>
+                    <GridViewColumn Header="b1" DisplayMemberBinding="{Binding B1}"/>
+                    <GridViewColumn Header="b2" DisplayMemberBinding="{Binding B2}"/>
+                    <GridViewColumn Header="b12" DisplayMemberBinding="{Binding B12}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+    </Grid>
+</UserControl>
