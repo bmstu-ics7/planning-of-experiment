@@ -133,6 +133,9 @@ namespace Lab02
                     double yl = Math.Round(b0 + listX1[i] * b1 + listX2[i] * b2, 5);
                     double ycn = Math.Round(b0 + listX1[i] * b1 + listX2[i] * b2 + listX12[i] * b12, 5);
 
+                    yl = Math.Abs(yl);
+                    ycn = Math.Abs(ycn);
+
                     ListView_TableParameters.Items.Add(new EquationCoefffcients(
                         i + 1,
                         listX0[i],
@@ -189,6 +192,9 @@ namespace Lab02
 
                 double yl = Math.Round(b0 + x1 * b1 + x2 * b2, 5);
                 double ycn = Math.Round(b0 + x1 * b1 + x2 * b2 + x12 * b12, 5);
+
+                yl = Math.Abs(yl);
+                ycn = Math.Abs(ycn);
 
                 ListView_TableParameters.Items.Add(new EquationCoefffcients(
                     n,
