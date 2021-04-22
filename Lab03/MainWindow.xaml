@@ -23,6 +23,7 @@
                         <ColumnDefinition/>
                         <ColumnDefinition/>
                         <ColumnDefinition/>
+                        <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition/>
@@ -32,10 +33,11 @@
                         <RowDefinition/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
-                    <Label Content="Эксперимент" Grid.ColumnSpan="3" FontSize="16" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    <Label Content="Эксперимент" Grid.ColumnSpan="4" FontSize="16" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" />
                     <Label Content="Интенсивность&#xD;&#xA;поступлеия 1" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14" />
                     <Label Content="Интенсивность&#xD;&#xA;поступления 2" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14"/>
-                    <Label Content="Интенсивность&#xD;&#xA;обслуживания" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14" />
+                    <Label Content="Интенсивность&#xD;&#xA;обслуживания 1" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14" />
+                    <Label Content="Интенсивность&#xD;&#xA;обслуживания 2" Grid.Row="1" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14" />
 
                     <Grid Grid.Row="2" Grid.Column="0">
                         <Grid.ColumnDefinitions>
@@ -79,7 +81,7 @@
                             <ColumnDefinition Width="2*"/>
                         </Grid.ColumnDefinitions>
                         <Label Content="Минимум" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"/>
-                        <TextBox x:Name="TextBox_MinProcessing" Grid.Column="1" Margin="10" Text="10" FontSize="16" />
+                        <TextBox x:Name="TextBox_MinProcessing1" Grid.Column="1" Margin="10" Text="10" FontSize="16" />
                     </Grid>
 
                     <Grid Grid.Row="3" Grid.Column="2">
@@ -88,10 +90,28 @@
                             <ColumnDefinition Width="2*"/>
                         </Grid.ColumnDefinitions>
                         <Label Content="Максимум" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"/>
-                        <TextBox x:Name="TextBox_MaxProcessing" Grid.Column="1" Margin="10" Text="10.3" FontSize="16" />
+                        <TextBox x:Name="TextBox_MaxProcessing1" Grid.Column="1" Margin="10" Text="10.3" FontSize="16" />
                     </Grid>
 
-                    <Grid Grid.Row="4" Grid.ColumnSpan="3">
+                    <Grid Grid.Row="2" Grid.Column="3" >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="2*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Content="Минимум" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"/>
+                        <TextBox x:Name="TextBox_MinProcessing2" Grid.Column="1" Margin="10" Text="10" FontSize="16" />
+                    </Grid>
+
+                    <Grid Grid.Row="3" Grid.Column="3">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="2*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Content="Максимум" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"/>
+                        <TextBox x:Name="TextBox_MaxProcessing2" Grid.Column="1" Margin="10" Text="10.3" FontSize="16" />
+                    </Grid>
+
+                    <Grid Grid.Row="4" Grid.ColumnSpan="4">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition />
                             <ColumnDefinition />
@@ -115,15 +135,18 @@
                         <RowDefinition/>
                         <RowDefinition/>
                         <RowDefinition/>
+                        <RowDefinition/>
                     </Grid.RowDefinitions>
                     <Label Content="Добавление точки факторного пространства" Grid.ColumnSpan="2" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                    <Label Content="Интенсивность&#xD;&#xA;поступления 1" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16"/>
-                    <Label Content="Интенсивность&#xD;&#xA;поступления 2" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16"/>
-                    <Label Content="Интенсивность&#xD;&#xA;обслуживания" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16"/>
-                    <TextBox x:Name="TextBox_PointComing1" Grid.Row="1" Grid.Column="1" Margin="10, 15" Text="3.2" FontSize="16" />
-                    <TextBox x:Name="TextBox_PointComing2" Grid.Row="2" Grid.Column="1" Margin="10, 15" Text="3.2" FontSize="16" />
-                    <TextBox x:Name="TextBox_PointProcessing" Grid.Row="3" Grid.Column="1" Margin="10, 15" Text="10.15" FontSize="16" />
-                    <Button x:Name="Button_AddPoint" Content="Добавить" Grid.Row="4" Grid.ColumnSpan="2" Margin="10" FontSize="20" IsEnabled="False" Click="Button_AddPoint_Click" />
+                    <Label Content="Интенсивность поступления 1" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16"/>
+                    <Label Content="Интенсивность поступления 2" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16"/>
+                    <Label Content="Интенсивность обслуживания 1" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16"/>
+                    <Label Content="Интенсивность обслуживания 2" Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16"/>
+                    <TextBox x:Name="TextBox_PointComing1" Grid.Row="1" Grid.Column="1" Margin="10, 15" Text="3.2" FontSize="14" />
+                    <TextBox x:Name="TextBox_PointComing2" Grid.Row="2" Grid.Column="1" Margin="10, 15" Text="3.2" FontSize="14" />
+                    <TextBox x:Name="TextBox_PointProcessing1" Grid.Row="3" Grid.Column="1" Margin="10, 15" Text="10.15" FontSize="14" />
+                    <TextBox x:Name="TextBox_PointProcessing2" Grid.Row="4" Grid.Column="1" Margin="10, 15" Text="10.15" FontSize="14" />
+                    <Button x:Name="Button_AddPoint" Content="Добавить" Grid.Row="5" Grid.ColumnSpan="2" Margin="10" FontSize="20" IsEnabled="False" Click="Button_AddPoint_Click" />
                 </Grid>
             </Border>
         </Grid>
@@ -138,7 +161,7 @@
                     <Grid.RowDefinitions>
                         <RowDefinition />
                         <RowDefinition Height="5*"/>
-                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="2*"/>
                     </Grid.RowDefinitions>
 
                     <Label Content="ПФЭ" FontSize="18" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center"/>
@@ -151,10 +174,18 @@
                                 <GridViewColumn Header="x1" DisplayMemberBinding="{Binding X1}"/>
                                 <GridViewColumn Header="x2" DisplayMemberBinding="{Binding X2}"/>
                                 <GridViewColumn Header="x3" DisplayMemberBinding="{Binding X3}"/>
+                                <GridViewColumn Header="x4" DisplayMemberBinding="{Binding X4}"/>
                                 <GridViewColumn Header="x12" DisplayMemberBinding="{Binding X12}"/>
                                 <GridViewColumn Header="x13" DisplayMemberBinding="{Binding X13}"/>
+                                <GridViewColumn Header="x14" DisplayMemberBinding="{Binding X14}"/>
                                 <GridViewColumn Header="x23" DisplayMemberBinding="{Binding X23}"/>
+                                <GridViewColumn Header="x24" DisplayMemberBinding="{Binding X24}"/>
+                                <GridViewColumn Header="x34" DisplayMemberBinding="{Binding X34}"/>
                                 <GridViewColumn Header="x123" DisplayMemberBinding="{Binding X123}"/>
+                                <GridViewColumn Header="x124" DisplayMemberBinding="{Binding X124}"/>
+                                <GridViewColumn Header="x134" DisplayMemberBinding="{Binding X134}"/>
+                                <GridViewColumn Header="x234" DisplayMemberBinding="{Binding X234}"/>
+                                <GridViewColumn Header="x1234" DisplayMemberBinding="{Binding X1234}"/>
                                 <GridViewColumn Header="Y" DisplayMemberBinding="{Binding Y}"/>
                                 <GridViewColumn Header="Yл" DisplayMemberBinding="{Binding Yl}"/>
                                 <GridViewColumn Header="Yчн" DisplayMemberBinding="{Binding Ycn}"/>
@@ -171,10 +202,18 @@
                                 <GridViewColumn Header="b1" DisplayMemberBinding="{Binding B1}"/>
                                 <GridViewColumn Header="b2" DisplayMemberBinding="{Binding B2}"/>
                                 <GridViewColumn Header="b3" DisplayMemberBinding="{Binding B3}"/>
+                                <GridViewColumn Header="b4" DisplayMemberBinding="{Binding B4}"/>
                                 <GridViewColumn Header="b12" DisplayMemberBinding="{Binding B12}"/>
                                 <GridViewColumn Header="b13" DisplayMemberBinding="{Binding B13}"/>
+                                <GridViewColumn Header="b14" DisplayMemberBinding="{Binding B14}"/>
                                 <GridViewColumn Header="b23" DisplayMemberBinding="{Binding B23}"/>
+                                <GridViewColumn Header="b24" DisplayMemberBinding="{Binding B24}"/>
+                                <GridViewColumn Header="b34" DisplayMemberBinding="{Binding B34}"/>
                                 <GridViewColumn Header="b123" DisplayMemberBinding="{Binding B123}"/>
+                                <GridViewColumn Header="b124" DisplayMemberBinding="{Binding B124}"/>
+                                <GridViewColumn Header="b134" DisplayMemberBinding="{Binding B134}"/>
+                                <GridViewColumn Header="b234" DisplayMemberBinding="{Binding B234}"/>
+                                <GridViewColumn Header="b1234" DisplayMemberBinding="{Binding B1234}"/>
                             </GridView>
                         </ListView.View>
                     </ListView>
@@ -186,7 +225,7 @@
                     <Grid.RowDefinitions>
                         <RowDefinition />
                         <RowDefinition Height="5*"/>
-                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="2*"/>
                     </Grid.RowDefinitions>
 
                     <Label Content="ДФЭ" FontSize="18" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center"/>
@@ -199,10 +238,18 @@
                                 <GridViewColumn Header="x1" DisplayMemberBinding="{Binding X1}"/>
                                 <GridViewColumn Header="x2" DisplayMemberBinding="{Binding X2}"/>
                                 <GridViewColumn Header="x3" DisplayMemberBinding="{Binding X3}"/>
+                                <GridViewColumn Header="x4" DisplayMemberBinding="{Binding X4}"/>
                                 <GridViewColumn Header="x12" DisplayMemberBinding="{Binding X12}"/>
                                 <GridViewColumn Header="x13" DisplayMemberBinding="{Binding X13}"/>
+                                <GridViewColumn Header="x14" DisplayMemberBinding="{Binding X14}"/>
                                 <GridViewColumn Header="x23" DisplayMemberBinding="{Binding X23}"/>
+                                <GridViewColumn Header="x24" DisplayMemberBinding="{Binding X24}"/>
+                                <GridViewColumn Header="x34" DisplayMemberBinding="{Binding X34}"/>
                                 <GridViewColumn Header="x123" DisplayMemberBinding="{Binding X123}"/>
+                                <GridViewColumn Header="x124" DisplayMemberBinding="{Binding X124}"/>
+                                <GridViewColumn Header="x134" DisplayMemberBinding="{Binding X134}"/>
+                                <GridViewColumn Header="x234" DisplayMemberBinding="{Binding X234}"/>
+                                <GridViewColumn Header="x1234" DisplayMemberBinding="{Binding X1234}"/>
                                 <GridViewColumn Header="Y" DisplayMemberBinding="{Binding Y}"/>
                                 <GridViewColumn Header="Yл" DisplayMemberBinding="{Binding Yl}"/>
                                 <GridViewColumn Header="Yчн" DisplayMemberBinding="{Binding Ycn}"/>
@@ -219,10 +266,18 @@
                                 <GridViewColumn Header="b1" DisplayMemberBinding="{Binding B1}"/>
                                 <GridViewColumn Header="b2" DisplayMemberBinding="{Binding B2}"/>
                                 <GridViewColumn Header="b3" DisplayMemberBinding="{Binding B3}"/>
+                                <GridViewColumn Header="b4" DisplayMemberBinding="{Binding B4}"/>
                                 <GridViewColumn Header="b12" DisplayMemberBinding="{Binding B12}"/>
                                 <GridViewColumn Header="b13" DisplayMemberBinding="{Binding B13}"/>
+                                <GridViewColumn Header="b14" DisplayMemberBinding="{Binding B14}"/>
                                 <GridViewColumn Header="b23" DisplayMemberBinding="{Binding B23}"/>
+                                <GridViewColumn Header="b24" DisplayMemberBinding="{Binding B24}"/>
+                                <GridViewColumn Header="b34" DisplayMemberBinding="{Binding B34}"/>
                                 <GridViewColumn Header="b123" DisplayMemberBinding="{Binding B123}"/>
+                                <GridViewColumn Header="b124" DisplayMemberBinding="{Binding B124}"/>
+                                <GridViewColumn Header="b134" DisplayMemberBinding="{Binding B134}"/>
+                                <GridViewColumn Header="b234" DisplayMemberBinding="{Binding B234}"/>
+                                <GridViewColumn Header="b1234" DisplayMemberBinding="{Binding B1234}"/>
                             </GridView>
                         </ListView.View>
                     </ListView>
