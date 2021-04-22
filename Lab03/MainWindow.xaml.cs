@@ -242,6 +242,9 @@ namespace Lab03
                 double yl = Math.Round(b0_PFE + listX1[i] * b1_PFE + listX2[i] * b2_PFE + listX3[i] * b3_PFE, 5);
                 double ycn = Math.Round(b0_PFE + listX1[i] * b1_PFE + listX2[i] * b2_PFE + listX3[i] * b3_PFE + listX12[i] * b12_PFE + listX13[i] * b13_PFE + listX23[i] * b23_PFE + listX123[i] * b123_PFE, 5);
 
+                yl = Math.Abs(yl);
+                ycn = Math.Abs(ycn);
+
                 ListView_TableParameters.Items.Add(new EquationCoefffcients(
                     i + 1,
                     listX0[i],
@@ -343,6 +346,9 @@ namespace Lab03
                 double yl = Math.Round(b0_DFE + listX1[i] * b1_DFE + listX2[i] * b2_DFE + listX3[i] * b3_DFE, 5);
                 double ycn = Math.Round(b0_DFE + listX1[i] * b1_DFE + listX2[i] * b2_DFE + listX3[i] * b3_DFE + listX12[i] * b12_DFE + listX13[i] * b13_DFE + listX23[i] * b23_DFE + listX123[i] * b123_DFE, 5);
 
+                yl = Math.Abs(yl);
+                ycn = Math.Abs(ycn);
+
                 ListView_TableParametersDFE.Items.Add(new EquationCoefffcients(
                     i + 1,
                     listX0[i],
@@ -392,6 +398,9 @@ namespace Lab03
             double yl = Math.Round(b0_PFE + x1 * b1_PFE + x2 * b2_PFE + x3 * b3_PFE, 5);
             double ycn = Math.Round(b0_PFE + x1 * b1_PFE + x2 * b2_PFE + x3 * b3_PFE + x12 * b12_PFE + x13 * b13_PFE + x23 * b23_PFE + x123 * b123_PFE, 5);
 
+            yl = Math.Abs(yl);
+            ycn = Math.Abs(ycn);
+
             ListView_TableParameters.Items.Add(new EquationCoefffcients(
                 n_PFE,
                 x0,
@@ -436,6 +445,9 @@ namespace Lab03
 
             double yl = Math.Round(b0_DFE + x1 * b1_DFE + x2 * b2_DFE + x3 * b3_DFE, 5);
             double ycn = Math.Round(b0_DFE + x1 * b1_DFE + x2 * b2_DFE + x3 * b3_DFE + x12 * b12_DFE + x13 * b13_DFE + x23 * b23_DFE + x123 * b123_DFE, 5);
+
+            yl = Math.Abs(yl);
+            ycn = Math.Abs(ycn);
 
             ListView_TableParametersDFE.Items.Add(new EquationCoefffcients(
                 n_DFE,
