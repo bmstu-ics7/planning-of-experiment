@@ -6,13 +6,19 @@ namespace Modeling.QueuingSystem
 {
     public class Model
     {
-        private readonly Generator _generator;
+        private readonly IList<Generator> _generators;
 
         private IList<IBlock> _blocks;
 
         public Model(Generator generator, List<IBlock> blocks)
         {
-            _generator = generator;
+            _generators = new List<Generator> { generator };
+            _blocks = blocks;
+        }
+
+        public Model(List<Generator> generators, List<IBlock> blocks)
+        {
+            _generators = generators;
             _blocks = blocks;
         }
 
@@ -21,10 +27,29 @@ namespace Modeling.QueuingSystem
             double time = 0;
             List<int> timesWait = new List<int>();
 
-            while (_generator.Count > 0)
+            while (true)
             {
-                Console.WriteLine(time);
-                time = _generator.Next;
+                bool exit = true;
+                foreach (var gen in _generators)
+                {
+                    if (gen.Count > 0)
+                    {
+                        exit = false;
+                        break;
+                    }
+                }
+
+                if (exit) break;
+
+                time = _generators[0].Next;
+                foreach (var gen in _generators)
+                {
+                    if (0 < gen.Next && gen.Next < time)
+                    {
+                        time = gen.Next;
+                    }
+                }
+
                 foreach (var block in _blocks)
                 {
                     if (0 < block.Next && block.Next < time)
