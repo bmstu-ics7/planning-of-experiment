@@ -24,12 +24,15 @@ namespace Modeling.QueuingSystem
             set => _next = value > 0 ? value : 0;
         }
 
-        public Generator(IDistribution distribution, IList<Operator> recievers, int count)
+        private int _generatorType;
+
+        public Generator(IDistribution distribution, IList<Operator> recievers, int count, int generatorType)
         {
             _distribution = distribution;
             _recievers = recievers;
             _count = count;
             _next = 0;
+            _generatorType = generatorType;
         }
 
         public Operator GenerateRequest(double currentTime)
@@ -38,7 +41,7 @@ namespace Modeling.QueuingSystem
 
             foreach (var r in _recievers)
             {
-                if (r.ResieveRequest(currentTime))
+                if (r.ResieveRequest(currentTime, _generatorType))
                 {
                     return r;
                 }
