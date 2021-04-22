@@ -113,8 +113,8 @@ namespace Lab01
 
         private ModelResult CalculateModel(IDistribution generatorDistribution, IDistribution timeDistribution, int count)
         {
-            var op = new Operator(timeDistribution);
-            var generator = new Generator(generatorDistribution, new List<Operator> { op }, count);
+            var op = new Operator(new List<IDistribution> { timeDistribution });
+            var generator = new Generator(generatorDistribution, new List<Operator> { op }, count, 0);
             var model = new Modeling.QueuingSystem.Model(generator, new List<IBlock> { generator, op });
             return model.Generate();
         }
