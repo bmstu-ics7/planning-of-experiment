@@ -43,6 +43,6 @@
         <Label x:Name="Label_Time" Content="Время работы:" Grid.Column="1" Grid.Row="7" />
         <Label x:Name="Label_AvgTime" Content="Среднее время ожидания:" Grid.Column="1" Grid.Row="8" />
         <Label x:Name="Label_Count" Content="Количество обработанных заявок:" Grid.Column="1" Grid.Row="9" />
-        <Button x:Name="Button_UpdateGraph" Content="Перезапустить эксперимент" Grid.Column="1" Grid.Row="11" Margin="10, 0, 10, 10" Click="Button_UpdateGraph_Click"/>
+        <Button x:Name="Button_UpdateGraph" Content="Запустить эксперимент" Grid.Column="1" Grid.Row="11" Margin="10, 0, 10, 10" Click="Button_UpdateGraph_Click"/>
     </Grid>
 </Window>
